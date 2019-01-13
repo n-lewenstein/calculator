@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+     <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Calculator</h1>
+        <div id="displayWindow"></div>
+        <br>
+<table>
+    
+    <tr><td><button onClick="calc(1)" class="numBtn">1</button></td>
+        <td><button onClick="calc(2)" class="numBtn">2</button></td>
+        <td><button onClick="calc(3)" class="numBtn">3</button></td>
+        <td><button onClick="calc('+')" class="numBtn">+</button></td></tr>
+    
+    <tr><td><button onClick="calc(4)" class="numBtn">4</button></td>
+        <td><button onClick="calc(5)" class="numBtn">5</button></td>
+        <td><button onClick="calc(6)" class="numBtn">6</button></td>
+        <td><button onClick="calc('-')" class="numBtn">-</button></td></tr>
+    
+    <tr><td><button onClick="calc(7)" class="numBtn">7</button></td>
+        <td><button onClick="calc(8)" class="numBtn">8</button></td>
+        <td><button onClick="calc(9)" class="numBtn">9</button></td>
+        <td><button onClick="calc('x')" class="numBtn">x</button></td></tr>
+    
+    <tr><td><button onClick="calc('Cl')" class="numBtn">Cl</button></td>
+        <td><button onClick="calc(0)" class="numBtn">0</button></td>
+        <td><button onClick="calc('=')" class="numBtn">=</button></td>
+        <td><button onClick="calc('/')" class="numBtn">/</button></td></tr>
+    
+    </table>
+</div>
+
+    <script>
+        var statePrint = '';
+        var x='e';
+        var sign = '$';
+
+        function calc(dig){
+        var display = document.getElementById("displayWindow");
+       
+        if(dig=='Cl'){
+            x='e';
+            sign='$';
+            statePrint = '';
+            display.innerHTML=statePrint;
+        }
+        else if(!isNaN(dig)){
+            if(x == 'e'){
+                x=dig;
+                statePrint = statePrint + String(dig);
+                display.innerHTML = statePrint;
+            }
+           else if(sign == '$'){
+               x*=10;
+               x+=dig;
+               statePrint =statePrint + String(dig);
+               display.innerHTML = statePrint;
+           } 
+           else{
+               switch(sign){
+                   case '+':
+                   {
+                   x+=dig;
+                   break; 
+                   }
+                   case '-':
+                   {
+                   x-=dig;
+                   break; 
+                   }
+                   case 'x':
+                   {
+                   x*=dig;
+                   break; 
+                   }
+                   case '/':
+                   {
+                   x/=dig;
+                   break; 
+                   }
+               }
+               statePrint = statePrint + String(dig);
+               display.innerHTML = statePrint;
+               sign = '$';
+              
+
+           }
+        }
+        else if(dig == '='){
+            display.innerHTML = x;
+            statePrint = String(x);
+        }
+        else{
+            sign = dig;
+            statePrint += String(dig);
+            display.innerHTML = statePrint;
+        }
+        
+    }
+    </script>
+</body>
+</html>
